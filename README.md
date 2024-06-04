@@ -13,3 +13,6 @@ This code includes an integration with Flask, allowing users to interact with a 
 - Set up your Gemini's API key
 - The current vector database is set to electric car rules, but you can choose combustion's rules if needed
 - Customize the temperature and the number of subtopics used as context for the LLM
+
+
+_Created by Bruno Finardi Hime_
