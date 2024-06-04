@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}">
+    <script>
+        window.onload = function() {
+            var textarea = document.getElementById('user-input');
+            textarea.oninput = function() {
+                var lines = textarea.value.split('\n').length;
+                textarea.rows = Math.min(lines, 6); // Limit to 6 rows
+            };
+
+            const toggleButton = document.getElementById('toggleContext');
+            const context = document.getElementById('context');
+            if (toggleButton && context) {
+                toggleButton.onclick = function() {
+                    if (context.style.display === "none") {
+                        context.style.display = "block";
+                    } else {
+                        context.style.display = "none";
+                    }
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="texts">
+            {% if answer %}
+                <h2>Context:</h2>
+                <div class="context" id="context" style="display: none;">
+                    <p>{{ context | safe}}</p>
+                </div>
+
+                <button id="toggleContext">Toggle Context</button>
+        
+                <h2>Question:</h2>
+                <p id="question">{{ user_input | safe}}</p>
+
+                <h2>Answer:</h2>
+                <p id="answer">{{ answer | safe}}</p>
+            {% endif %}
+        </div>
+
+        <form action="" method="post">
+            <div class="txt-field">
+                <textarea name="user-input" id="user-input" rows="1" placeholder="Ask a question about the FSAE Rules..."></textarea>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
